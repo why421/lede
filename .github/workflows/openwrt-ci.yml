@@ -43,13 +43,13 @@ jobs:
           sudo -E apt-get -y autoremove --purge
           sudo -E apt-get clean
           
-      - name: Code Sync
-        run: |
-          git config --global user.email "why910421@hotmail.com"
-          git config --global user.name "why421"
-          git remote add openwrt https://github.com/coolsnowwolf/lede.git
-          git pull openwrt master --allow-unrelated-histories
-          git remote -v
+      # - name: Code Sync
+        # run: |
+          # git config --global user.email "why910421@hotmail.com"
+          # git config --global user.name "why421"
+          # git remote add openwrt https://github.com/coolsnowwolf/lede.git
+          # git pull openwrt master --allow-unrelated-histories
+          # git remote -v
           
       - name: Customized Theme and Plugin
         run: |
