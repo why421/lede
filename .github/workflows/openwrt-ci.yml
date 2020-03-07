@@ -47,7 +47,6 @@ jobs:
         run: |
           git config --global user.email "why910421@hotmail.com"
           git config --global user.name "why421"
-          git commit
           git remote add openwrt https://github.com/coolsnowwolf/lede.git
           git pull openwrt master --allow-unrelated-histories
           git remote -v
