@@ -13,6 +13,7 @@ on:
   push:
     branches: 
       - master
+  #     ↑↑↑ 改成你的分支名, 一般是master
   # schedule:
   #   - cron: 0 20 * * *
   # release:
@@ -26,7 +27,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
         with:
-          ref: master
+          ref: CI-demo
+        #      ↑↑↑ 改成你的分支名, 一般是master
 
       - name: Initialization environment
         env:
@@ -197,7 +199,7 @@ jobs:
           sed -i 's/^[ \t]*//g' ./.config
           make defconfig
 
-      - name: Make download
+      - name: Download package source code
         run: |
           make download -j8
           find dl -size -1024c -exec ls -l {} \;
@@ -208,15 +210,8 @@ jobs:
           echo -e "$(nproc) thread build."
           make -j$(nproc) V=s
 
-      - name: Assemble artifact
-        run: |
-          rm -rf ./artifact/
-          mkdir -p ./artifact/
-          find ./bin/targets/ -name "*combined*img*" | xargs -i mv -f {} ./artifact/
-          find ./bin/targets/ -name "*sysupgrade*bin*" | xargs -i mv -f {} ./artifact/
-
-      - name: Upload artifact
+      - name : Upload artifact
         uses: actions/upload-artifact@master
         with:
           name: OpenWrt firmware
-          path: ./artifact/
+          path: bin/targets
